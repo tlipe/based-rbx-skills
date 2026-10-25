@@ -31,6 +31,14 @@ These are supported in Roblox Studio 2026. Never flag them as invalid:
 
 `const` makes the binding immutable, not the value. A `const` table still allows mutation of contents. Use `table.freeze()` when content immutability is required.
 
+### When to use const vs local
+- Services (`game:GetService("HttpService")`, etc.): always `const`. Never reassigned.
+- Instances created once and never replaced: `const`.
+- Config values, lookup tables, module references: `const`.
+- Loop counters, accumulators, state that changes: `local`.
+- Wrong: `local httpService = game:GetService("HttpService")`
+- Right: `const HttpService = game:GetService("HttpService")`
+
 ## Deprecated → Modern
 
 ### Methods
@@ -101,7 +109,8 @@ On `"attempt to assign to const variable"`: the variable was declared `const`. E
 - No `Region3` (use `GetPartBoundsInBox()`)
 - DataStore calls use async variants
 - Character spawning uses `LoadCharacterAsync()`
-- `const` used for immutable bindings (config, references that never reassign)
+- `const` used for immutable bindings (services, config, references that never reassign)
+- Services use `const`, not `local`
 - No `table.foreach`, `table.foreachi`, `table.getn`
 
 If uncertain: https://create.roblox.com/docs/reference/engine
