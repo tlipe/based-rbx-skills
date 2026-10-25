@@ -1,5 +1,5 @@
 ---
-name: api-safety
+name: roblox-api-safety
 description: Detect and prevent deprecated Roblox API usage in Luau code. Triggers on Roblox/Luau code requests, deprecated methods, API errors, or API validation. Scans for deprecated APIs and auto-corrects with modern replacements.
 ---
 

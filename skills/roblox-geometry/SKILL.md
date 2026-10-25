@@ -1,5 +1,5 @@
 ---
-name: geometry
+name: roblox-geometry
 description: Roblox 3D geometry and spatial reasoning conventions. Auto-loaded; use for CFrame, Vector3, direction, movement, orientation, coordinate space tasks.
 ---
 

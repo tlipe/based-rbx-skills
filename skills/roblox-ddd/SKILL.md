@@ -1,5 +1,5 @@
 ---
-name: ddd
+name: roblox-ddd
 description: Use for DDD (Domain-Driven Design in usage on Roblox Studio) architectural pattern for structuring scalable game systems.
 ---
 

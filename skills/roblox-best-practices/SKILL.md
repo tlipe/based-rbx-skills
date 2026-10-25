@@ -1,5 +1,5 @@
 ---
-name: studio-best-practices
+name: roblox-best-practices
 description: "Enforce Roblox Studio engineering standards, architecture, and AI-specific failure prevention. Use when writing, reviewing, extending, debugging, or architecting ANY Roblox Studio code. Prevents auto-creating missing instances, duplicating systems, breaking client/server boundaries, raw RemoteEvents/DataStoreService, and untested code."
 ---
 

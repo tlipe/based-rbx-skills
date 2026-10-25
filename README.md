@@ -36,11 +36,11 @@ git clone https://github.com/tlipe/based-rbx-skills.git .agents/skills/based-rbx
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| [`api-safety`](skills/api-safety/SKILL.md) | Any Roblox/Luau code request | Detects deprecated APIs, enforces `const` bindings, modern Luau syntax, and auto-corrects with current replacements. |
-| [`luau`](skills/luau/SKILL.md) | Auto-loaded on all Luau output | Binding discipline (`const` vs `local`), naming conventions, type system usage, modern require syntax, string interpolation, compound assignment. |
-| [`ddd`](skills/ddd/SKILL.md) | Architecture / module structure tasks | Domain-driven layout for Roblox: shared/server/client separation, controller/service lifecycle, index-as-data rule, direct `return { ... }` tables. |
-| [`geometry`](skills/geometry/SKILL.md) | CFrame, Vector3, movement, orientation | Spatial reasoning contract: local vs global space, LookVector derivation, right-vector cross order, Q/E yaw signs, top-down camera exceptions. |
-| [`studio-best-practices`](skills/studio-best-practices/SKILL.md) | Writing, reviewing, debugging any Studio code | Instance creation guards, networking/data-store abstraction, client/server boundary enforcement, validation rules, testing workflow. |
+| [`roblox-api-safety`](skills/roblox-api-safety/SKILL.md) | Any Roblox/Luau code request | Detects deprecated APIs, enforces `const` bindings, modern Luau syntax, and auto-corrects with current replacements. |
+| [`roblox-luau`](skills/roblox-luau/SKILL.md) | Auto-loaded on all Luau output | Binding discipline (`const` vs `local`), naming conventions, type system usage, modern require syntax, string interpolation, compound assignment. |
+| [`roblox-ddd`](skills/roblox-ddd/SKILL.md) | Architecture / module structure tasks | Domain-driven layout for Roblox: shared/server/client separation, controller/service lifecycle, index-as-data rule, direct `return { ... }` tables. |
+| [`roblox-geometry`](skills/roblox-geometry/SKILL.md) | CFrame, Vector3, movement, orientation | Spatial reasoning contract: local vs global space, LookVector derivation, right-vector cross order, Q/E yaw signs, top-down camera exceptions. |
+| [`roblox-best-practices`](skills/roblox-best-practices/SKILL.md) | Writing, reviewing, debugging any Studio code | Instance creation guards, networking/data-store abstraction, client/server boundary enforcement, validation rules, testing workflow. |
 
 ---
 

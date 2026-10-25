@@ -1,5 +1,5 @@
 ---
-name: luau
+name: roblox-luau
 description: Luau language conventions for Roblox Studio code generation. Auto-loaded; applies to all Luau code written by any agent.
 ---
 
