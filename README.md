@@ -18,6 +18,12 @@
 npx skills add tlipe/based-rbx-skills
 ```
 
+Or method 2:
+
+```bash
+npx skills add https://github.com/tlipe/based-rbx-skills
+```
+
 Or manually clone into your agent's skill directory:
 
 ```bash
