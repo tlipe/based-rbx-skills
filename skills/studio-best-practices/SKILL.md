@@ -11,7 +11,10 @@ Do not stop until you have verified your own work. Playtest + console check befo
 ## Code rules (strict)
 - Code is English-only: identifiers, strings, logs, error messages. Zero Portuguese in code.
 - No comments unless explicitly requested.
-- camelCase for ALL variables/fields/constants/params/table keys — zero tolerance. No UPPER_CASE. PascalCase for types/classes only. Enum members exempt.
+- camelCase for local variables, member values, functions, params, table keys. PascalCase for types/classes and Roblox API references. LOUD_SNAKE_CASE for `const` bindings that hold config or service references. Enum members exempt.
+- Services always `const`, never `local`. Example: `const HttpService = game:GetService("HttpService")`.
+- Module-level singletons and references that never reassign: `const`.
+- Loop counters, accumulators, mutable state: `local`.
 
 ## Pre-work
 1. Use `search_game_tree`, `script_grep`, `script_search` — never assume structure.
@@ -23,27 +26,36 @@ Do not stop until you have verified your own work. Playtest + console check befo
 ## Instance rules
 Never auto-create missing instances. Detect absence → `error("[System] Missing: path")` → return early.
 
+## Luau syntax enforcement
+Follow api-safety skill for full list. Key rules:
+- `const` for immutable bindings (services, configs, module refs). `local` for mutable state.
+- Generalized iteration (`for k, v in tbl do`) over `pairs`/`ipairs`.
+- String interpolation (`` `{var}` ``) over concatenation.
+- Compound assignment (`+=`, `..=`, etc.) over verbose reassignment.
+- If-then-else expressions over `a and b or c` ternary idiom.
+- `continue` for loop skip, not nested if blocks.
+- Floor division (`//`) over `math.floor(a / b)`.
+
 ## Code rules
-- Cache `FindFirstChild`/`GetService` at module load, never inside loops/events.
-- `const` for immutables: `const maxPlayers = 16`, `const function name(...)`, `const calc = function(...)`.
+- Cache `FindFirstChild`/`GetService` at module load with `const`, never inside loops/events.
 - No `while true do` — use `RunService.Heartbeat`/`RenderStepped`.
-- No `pairs`/`ipairs` — use `for i, v in table do`.
-- `table.freeze()` on static tables only when mutation risk is real. One freeze at outermost level.
-- String interpolation `` `{var}` `` over `..`.
+- `table.freeze()` on static tables only when mutation risk is real. One freeze at outermost level. Never freeze inside data module returns; use direct `return { ... }`.
 - No global state (`_G`, `shared`). Disconnect events when done.
 - No useless whitespace. Blank lines inside tables only to separate logical groups.
-- `require()` at module top-level only. Never inside functions/callbacks. Use intermediate path variables.
+- `require()` at module top-level only, assigned to `const`. Never inside functions/callbacks.
 - No `.Parent` chains beyond one level. Use `GetService()` refs or cached intermediates.
 - Module pattern: `return function(...): ModuleType local self = {} ... return self end`. Never annotate varargs with type.
-- Every line must justify its existence. No ritual code.
+- Every line must justify its existence. No ritual code. No defensive wrappers without concrete threat.
 
 ## Networking
 - Never use `RemoteEvent`/`RemoteFunction` directly. Use project library (BridgeNet2, Red, Knit, Warp). If absent: ask user.
 - Server always validates; client only reflects confirmed state.
+- Never trust client-supplied data. Validate type, range, ownership server-side before acting.
 
 ## Data persistence
 - Never use `DataStoreService` directly. Use project library (ProfileStore, DataKeep, KoltStore). If absent: ask user.
 - Never write player data from client.
+- Wrap all DataStore calls in pcall. Log failures. Retry with backoff on throttle.
 
 ## Client / Server
 | Client | Server |
