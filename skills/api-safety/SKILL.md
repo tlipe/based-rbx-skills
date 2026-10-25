@@ -13,7 +13,23 @@ Do not stop until you have verified your own work. Re-check generated code again
 ## Code rules (strict)
 - Code is English-only: identifiers, strings, logs, error messages. Zero Portuguese in code.
 - No comments unless explicitly requested.
-- camelCase only for local identifiers. No UPPER_CASE, no snake_case.
+- camelCase only for local variables, member values, functions. PascalCase for Roblox APIs. LOUD_SNAKE_CASE for constants (`const`).
+
+## Luau syntax (current, valid)
+These are supported in Roblox Studio 2026. Never flag them as invalid:
+- `const NAME = value` — immutable binding. Contextual keyword: valid wherever `local` is valid. Reassignment causes error. Works with type annotations (`const X: number = 1`) and function declarations (`const function foo()`).
+- `if cond then expr else expr` — if-then-else expression. Preferred over `a and b or c` ternary idiom.
+- `` `text {expr}` `` — string interpolation (backtick literals).
+- `//` — floor division operator.
+- `+=`, `-=`, `*=`, `/=`, `//=`, `%=`, `^=`, `..=` — compound assignment operators.
+- `continue` — loop continue statement (not a keyword; contextual).
+- `for k, v in tbl do` — generalized iteration (no `pairs`/`ipairs` needed for tables).
+- `type Alias = ...` — type aliases; `export type` to share across modules.
+- `@native`, `@yields`, `@checkedCast` — function attributes.
+- Hex/binary literals: `0xFF`, `0b1010`. Digit separators: `1_048_576`.
+- `\x`, `\u{}`, `\z` string escapes.
+
+`const` makes the binding immutable, not the value. A `const` table still allows mutation of contents. Use `table.freeze()` when content immutability is required.
 
 ## Deprecated → Modern
 
@@ -23,10 +39,11 @@ Do not stop until you have verified your own work. Re-check generated code again
 | camelCase methods | PascalCase equivalent |
 | `getService()` | `GetService()` |
 | `Humanoid:LoadAnimation()` | `Animator:LoadAnimation()` |
-| `FindPartOnRay()`, `FindPartOnRayWithIgnoreList()`, `FindPartsInRegion3()` | `Raycast()` + `RaycastParams` |
+| `FindPartOnRay()`, `FindPartOnRayWithIgnoreList()`, `FindPartsInRegion3()` | `workspace:Raycast()` + `RaycastParams` |
 | `UserHasBadge()` | `UserHasBadgeAsync()` |
 | `makeJoints()` | Constraints |
 | `Player:LoadCharacter()` | `Player:LoadCharacterAsync()` |
+| `table.foreach()`, `table.foreachi()`, `table.getn()` | Generic `for` loops / `#t` |
 
 ### Classes
 | Deprecated | Modern |
@@ -45,17 +62,16 @@ Do not stop until you have verified your own work. Re-check generated code again
 
 **Raycast:**
 ```lua
-local params = RaycastParams.new()
+const params = RaycastParams.new()
 params.FilterDescendantsInstances = {character}
 params.FilterType = Enum.RaycastFilterType.Exclude
-local result = workspace:Raycast(origin, direction, params)
-if result then local hit, pos = result.Instance, result.Position end
+const result = workspace:Raycast(origin, direction, params)
 ```
 
 **BodyVelocity → LinearVelocity:**
 ```lua
-local att = Instance.new("Attachment", part)
-local lv = Instance.new("LinearVelocity")
+const att = Instance.new("Attachment", part)
+const lv = Instance.new("LinearVelocity")
 lv.Attachment0 = att
 lv.MaxForce = math.huge
 lv.VectorVelocity = Vector3.new(0, 50, 0)
@@ -65,23 +81,27 @@ lv.Parent = part
 
 **Animation:**
 ```lua
-local animator = humanoid:FindFirstChildOfClass("Animator") or Instance.new("Animator", humanoid)
-local track = animator:LoadAnimation(animInstance)
+const animator = humanoid:FindFirstChildOfClass("Animator") or Instance.new("Animator", humanoid)
+const track = animator:LoadAnimation(animInstance)
 ```
 
 ## Error adaptation
 On `"X is not a valid member of Y"`:
-1. Check casing (camelCase → PascalCase).
-2. Check if deprecated entirely → find modern replacement.
+1. Check casing (camelCase to PascalCase).
+2. Check if deprecated entirely, find modern replacement.
 3. Provide corrected code.
 
+On `"attempt to assign to const variable"`: the variable was declared `const`. Either remove `const` if reassignment is intended, or use a different variable name.
+
 ## Checklist
-- All methods PascalCase
+- All Roblox API methods PascalCase
 - No BodyMover classes
-- Raycast via `Raycast()` + `RaycastParams`
+- Raycast via `workspace:Raycast()` + `RaycastParams`
 - Animations via `Animator:LoadAnimation()`
 - No `Region3` (use `GetPartBoundsInBox()`)
 - DataStore calls use async variants
 - Character spawning uses `LoadCharacterAsync()`
+- `const` used for immutable bindings (config, references that never reassign)
+- No `table.foreach`, `table.foreachi`, `table.getn`
 
 If uncertain: https://create.roblox.com/docs/reference/engine
