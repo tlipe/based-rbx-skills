@@ -4,7 +4,7 @@
 
 **Agent skills for Roblox Studio development.** Enforce Luau modern syntax, API safety, DDD architecture, spatial reasoning, and engineering best practices across all AI-assisted code generation.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: MPL-2.0](https://img.shields.io/badge/License-MPL--2.0-blue.svg)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-5-green.svg)](#skills)
 [![Luau](https://img.shields.io/badge/Luau-Roblox%20Studio%202026-orange.svg)](https://create.roblox.com/docs/luau)
 
