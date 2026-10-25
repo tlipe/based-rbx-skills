@@ -53,6 +53,12 @@ git clone https://github.com/tlipe/based-rbx-skills.git .agents/skills/based-rbx
 
 ---
 
+## About quality
+
+These skills encode practices from professional Roblox developers: safe component usage, optimized architecture, strict API discipline, and verified workflows. They reduce common AI mistakes (deprecated APIs, wrong binding choices, ritual code, broken client/server boundaries).
+
+Actual output quality still depends on the task complexity, the model used, and how well the prompt describes intent. Skills set the floor; they do not guarantee a ceiling.
+
 ## Compatibility
 
 - Roblox Studio 2026 (Luau with `const` bindings support)
