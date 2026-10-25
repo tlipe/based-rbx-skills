@@ -2,7 +2,7 @@
 
 # Based Rbx Skills
 
-**Agent skills for Roblox Studio development.** Enforce Luau modern syntax, API safety, DDD architecture, spatial reasoning, and engineering best practices across all AI-assisted code generation.
+**Agent skills for Roblox Studio development.** Professional-grade discipline for Luau syntax, API safety, architecture, spatial reasoning, and engineering practices across all AI-assisted code generation.
 
 [![License: MPL-2.0](https://img.shields.io/badge/License-MPL--2.0-blue.svg)](LICENSE)
 [![Skills](https://img.shields.io/badge/skills-5-green.svg)](#skills)
@@ -18,7 +18,7 @@
 npx skills add tlipe/based-rbx-skills
 ```
 
-Or method 2:
+Or via full URL:
 
 ```bash
 npx skills add https://github.com/tlipe/based-rbx-skills
@@ -36,32 +36,34 @@ git clone https://github.com/tlipe/based-rbx-skills.git .agents/skills/based-rbx
 
 | Skill | Trigger | Purpose |
 |-------|---------|---------|
-| [`roblox-api-safety`](skills/roblox-api-safety/SKILL.md) | Any Roblox/Luau code request | Detects deprecated APIs, enforces `const` bindings, modern Luau syntax, and auto-corrects with current replacements. |
-| [`roblox-luau`](skills/roblox-luau/SKILL.md) | Auto-loaded on all Luau output | Binding discipline (`const` vs `local`), naming conventions, type system usage, modern require syntax, string interpolation, compound assignment. |
+| [`roblox-api-safety`](skills/roblox-api-safety/SKILL.md) | Any Roblox/Luau code request | Detects deprecated APIs, enforces modern binding rules, and auto-corrects with current replacements. |
+| [`roblox-luau`](skills/roblox-luau/SKILL.md) | Auto-loaded on all Luau output | Binding discipline, naming conventions, type system usage, modern require syntax, string interpolation, compound assignment. |
 | [`roblox-ddd`](skills/roblox-ddd/SKILL.md) | Architecture / module structure tasks | Domain-driven layout for Roblox: shared/server/client separation, controller/service lifecycle, index-as-data rule, direct `return { ... }` tables. |
-| [`roblox-geometry`](skills/roblox-geometry/SKILL.md) | CFrame, Vector3, movement, orientation | Spatial reasoning contract: local vs global space, LookVector derivation, right-vector cross order, Q/E yaw signs, top-down camera exceptions. |
+| [`roblox-geometry`](skills/roblox-geometry/SKILL.md) | CFrame, Vector3, movement, orientation | Spatial reasoning contract: coordinate-space discipline, LookVector derivation, right-vector cross order, Q/E yaw signs, top-down camera exceptions. |
 | [`roblox-best-practices`](skills/roblox-best-practices/SKILL.md) | Writing, reviewing, debugging any Studio code | Instance creation guards, networking/data-store abstraction, client/server boundary enforcement, validation rules, testing workflow. |
 
 ---
 
 ## Design principles
 
-1. **Modern Luau only.** `const`, if-expressions, generalized iteration, string interpolation, compound assignment, floor division. No legacy patterns.
-2. **Zero ritual code.** No defensive wrappers, no unnecessary freezes, no intermediate variables where a direct return suffices.
-3. **Explicit over implicit.** Services are `const`. Mutable state is `local`. Naming encodes intent. Boundaries are enforced at the module level.
-4. **Verify before reporting done.** Every skill mandates playtest + console check or structural re-read before completion.
+1. **Modern Luau only.** Current syntax, no legacy patterns. The language evolved; the skills follow it.
+2. **Zero ritual code.** No defensive wrappers, no unnecessary freezes, no intermediate variables where a direct return suffices. Every line earns its place.
+3. **Explicit over implicit.** Naming encodes intent. Boundaries are enforced at the module level. Immutability is declared, not assumed.
+4. **Verify before reporting done.** Every skill mandates playtest + console check or structural re-read before completion. Untested code is unfinished code.
 
 ---
 
 ## About quality
 
-These skills encode practices from professional Roblox developers: safe component usage, optimized architecture, strict API discipline, and verified workflows. They reduce common AI mistakes (deprecated APIs, wrong binding choices, ritual code, broken client/server boundaries).
+These skills encode practices from professional Roblox developers: safe component usage, optimized architecture, strict API discipline, and verified workflows. They eliminate the most common AI mistakes — deprecated calls, sloppy bindings, ritual defenses, broken boundaries.
 
-Actual output quality still depends on the task complexity, the model used, and how well the prompt describes intent. Skills set the floor; they do not guarantee a ceiling.
+Output quality still depends on task complexity, model capability, and prompt clarity. Skills raise the floor. They do not promise a ceiling.
+
+---
 
 ## Compatibility
 
-- Roblox Studio 2026 (Luau with `const` bindings support)
+- Roblox Studio 2026 (full Luau feature set)
 - Works with OpenCode, Cursor, Windsurf, Claude Code, and any agent that loads SKILL.md files
 - Designed for Wails v3 desktop apps and standard Roblox projects alike
 
@@ -105,6 +107,6 @@ Built for agents that write Roblox code correctly the first time.
   If this project is useful to you, consider giving it a star.
   <br />
   <a href="https://github.com/tlipe/based-rbx-skills/stargazers">
-    <img src="https://img.shields.io/badge/Star_this_Project-★-yellow?style=for-the-badge&logo=github" alt="Star this project" />
+    <img src="https://img.shields.io/badge/Star_this_Project-%E2%98%85-yellow?style=for-the-badge&logo=github" alt="Star this project" />
   </a>
 </p>
