@@ -1,6 +1,6 @@
 <div align="center">
 
-# based-rbx-skills
+# Based Rbx Skills
 
 **Agent skills for Roblox Studio development.** Enforce Luau modern syntax, API safety, DDD architecture, spatial reasoning, and engineering best practices across all AI-assisted code generation.
 
