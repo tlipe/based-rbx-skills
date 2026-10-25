@@ -5,13 +5,16 @@ description: Use for DDD (Domain-Driven Design in usage on Roblox Studio) archit
 
 # DDD (Domain-Driven Design on Roblox Studio)
 
+This skill defines the target architecture. It does not assume any existing project layout. Before placing modules, inspect the current game tree (`search_game_tree`, `script_grep`). If the project already has a structure, follow it. This skill is the reference for new systems or when no convention exists yet.
+
 ## Verification
 Do not stop until you have verified your own work. Re-check module placement and require boundaries before reporting DONE.
 
 ## Code rules (strict)
 - Code is English-only: identifiers, strings, logs, error messages. Zero Portuguese in code.
 - No comments unless explicitly requested.
-- camelCase only. No UPPER_CASE, no snake_case.
+- camelCase for local variables, member values, functions, params, table keys. PascalCase for types/classes and Roblox API references. LOUD_SNAKE_CASE for `const` bindings holding config or service references. Enum members exempt.
+- Services always `const`, never `local`. Module refs, configs, singletons: `const`. Mutable state, loop counters, accumulators: `local`.
 
 ## Structure
 
