@@ -13,7 +13,12 @@ Do not stop until you have verified your own work. Sanity-check directions at id
 ## Code rules (strict)
 - Code is English-only: identifiers, strings, logs, error messages. Zero Portuguese in code.
 - No comments unless explicitly requested.
-- camelCase only. No UPPER_CASE, no snake_case.
+- camelCase for local variables, member values, functions, params, table keys. PascalCase for types/classes and Roblox API references. LOUD_SNAKE_CASE for `const` bindings holding config or service references. Enum members (`Enum.*`) exempt.
+- Services always `const`, never `local`. Module refs, configs, singletons: `const`. Mutable state, loop counters, accumulators: `local`.
+- `const` for immutable bindings (configs, service refs, lane tables). No `local` for immutables.
+- No `pairs`/`ipairs` — use generalized iteration `for i, v in table do`.
+- Prefer string interpolation `` `{var}` `` over concatenation.
+- Prefer compound assignment (`+=`, etc.) over verbose reassignment.
 
 ## Core principles (non-negotiable)
 1. CFrame is source of truth — never rely on `Position` alone for movement.
@@ -44,30 +49,30 @@ part.CFrame = part.CFrame * CFrame.new(0, 0, -10)
 
 ## Canonical patterns
 ```lua
-origin.CFrame = CFrame.lookAt(origin.Position, target.Position)
+const originCF = CFrame.lookAt(origin.Position, target.Position)
 
-local forward = part.CFrame.LookVector
-local toTarget = (target.Position - part.Position).Unit
+const forward = part.CFrame.LookVector
+const toTarget = (target.Position - part.Position).Unit
 if forward:Dot(toTarget) < 0 then end
 
 part.CFrame = CFrame.lookAt(part.Position, target.Position) * CFrame.Angles(0, math.rad(180), 0)
 
 part.CFrame += part.CFrame.LookVector * speed * dt
 
-local worldCF = part.CFrame * CFrame.new(offset)
-local localPos = part.CFrame:PointToObjectSpace(worldPoint)
+const worldCF = part.CFrame * CFrame.new(offset)
+const localPos = part.CFrame:PointToObjectSpace(worldPoint)
 
 part.CFrame = part.CFrame:Lerp(CFrame.lookAt(part.Position, target.Position), 0.1)
 ```
 
 ## Lane-based movement
 ```lua
-local lanes = {-6, 0, 6}
+const lanes = {-6, 0, 6}
 local function update(character, laneIndex, speed, dt)
-	local hrp = character.HumanoidRootPart
-	local forward = hrp.CFrame.LookVector
-	local right = hrp.CFrame.RightVector
-	local nextPos = hrp.Position + forward * speed * dt + right * lanes[laneIndex]
+	const hrp = character.HumanoidRootPart
+	const forward = hrp.CFrame.LookVector
+	const right = hrp.CFrame.RightVector
+	const nextPos = hrp.Position + forward * speed * dt + right * lanes[laneIndex]
 	hrp.CFrame = CFrame.lookAt(nextPos, nextPos + forward)
 end
 ```
