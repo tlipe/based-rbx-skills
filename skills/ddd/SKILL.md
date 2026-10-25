@@ -15,7 +15,7 @@ Do not stop until you have verified your own work. Re-check module placement and
 
 ## Structure
 
-**Workspace:** Client (local rendering) | Server (replication/rendering for all players)
+**Workspace:** Client (local rendering, folder) | Server (replication/rendering for all players, folder)
 
 **ReplicatedStorage/shared:** definitions (data contracts/schemas), index (pure `return { ... }` data tables), events (remotes/abstractions), registry (data modules returning tables), packages (libs: Warp, KoltStore, Spring, etc.), utils (pure functions)
 
@@ -28,3 +28,19 @@ Do not stop until you have verified your own work. Re-check module placement and
 - Shared modules: deterministic, side-effect free.
 - Indexes are data, not APIs. Never attach methods to an index table. Wrap query/filter/lookup in `*Helper` under `shared/utils/`.
 - Indexes use direct `return { ... }`. No intermediate variable, no nested `table.freeze`. Mirror sibling shape. No ritual protections without concrete threat.
+- Registry/data modules: single expression `return { key = value, ... }`. Never assign to a local first. Never wrap in `table.freeze()`. Freeze is not needed for data contracts; the module boundary already prevents mutation from outside.
+- Wrong (do NOT do this):
+```lua
+local myData = {}
+myData.health = 100
+myData.name = "sword"
+table.freeze(myData)
+return table.freeze(myData)
+```
+- Correct:
+```lua
+return {
+    health = 100,
+    name = "sword",
+}
+```
