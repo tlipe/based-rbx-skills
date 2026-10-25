@@ -67,6 +67,26 @@ Pull requests welcome. Each skill lives in `skills/<name>/SKILL.md`. Keep entrie
 
 ---
 
+## Related skills
+
+Other community projects targeting Roblox Studio agent workflows:
+
+| Repository | Focus |
+|------------|-------|
+| [EL4CTEO/roblox-skills](https://github.com/EL4CTEO/roblox-skills) | General Roblox development skills |
+| [TabooHarmony/roblox-brain](https://github.com/TabooHarmony/roblox-brain) | Knowledge base and reasoning aids |
+| [MSayib/roblox-dev-skill](https://github.com/MSayib/roblox-dev-skill) | Development workflow skills |
+| [justOzy/Roblox-Skills](https://github.com/justOzy/Roblox-Skills) | Curated skill collection |
+| [flatbedj/roblox-skills](https://github.com/flatbedj/roblox-skills) | Community skill pack |
+| [SyphoDev-yt/roblox-ai-skills](https://github.com/SyphoDev-yt/roblox-ai-skills) | AI-assisted Roblox coding |
+| [AshExplained/roblox-skills](https://github.com/AshExplained/roblox-skills) | Tutorial-driven skills |
+| [m4bwav/roblox-agent](https://github.com/m4bwav/roblox-agent) | Agent framework integration |
+| [Roblox/roblox-studio-agent-plugin](https://github.com/Roblox/roblox-studio-agent-plugin) | Official Roblox agent plugin |
+
+Install any with `npx skills add <owner>/<repo>`.
+
+---
+
 <div align="center">
 
 Built for agents that write Roblox code correctly the first time.
