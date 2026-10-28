@@ -18,13 +18,35 @@ Do not stop until you have verified your own work. Re-check module placement and
 
 ## Structure
 
-**Workspace:** Client (local rendering, folder) | Server (replication/rendering for all players, folder)
+**Workspace:**
+- `Client` — Local rendering. Instances, effects, visuals only visible to local player.
+- `Server` — Replication/rendering for all players. Physical instances, effects, visuals visible to everyone.
 
-**ReplicatedStorage/shared:** definitions (data contracts/schemas), index (pure `return { ... }` data tables), events (remotes/abstractions), registry (data modules returning tables), packages (libs: Warp, KoltStore, Spring, etc.), utils (pure functions)
+**ReplicatedStorage/shared:**
+- `definitions` — Schemas, contracts, type definitions shared between server/client.
+- `index` — Pure `return { ... }` data tables. No methods, no APIs.
+- `events` — RemoteEvents, network connections between server/client. Each ModuleScript handles one specific connection (e.g., shop purchase event). Use network library abstractions here.
+- `registry` — Data modules returning tables. Annotation/registration environment for votes, records, shared data.
+- `packages` — All external libraries (Warp, KoltStore, Spring, etc.). Every dependency lives here.
+- `utils` — Pure helper functions shared between server/client.
 
-**ServerScriptService/server:** classes (stateful domain objects), controllers (orchestrate systems; `function controllerName:start()`), services (long-lived; initialized once; `return 0`; no start()), utils (server-only helpers), bootstrapper (entry point; runs controllers:start() and services)
+**ServerScriptService/server:**
+- `classes` — Stateful domain objects, server-side classes.
+- `controllers` — Orchestrate systems. `function controllerName:start()`. Bootstrap lifecycle.
+- `services` — Long-lived modules. Initialized once. `return 0`. No `start()`.
+- `utils` — Server-only helpers.
+- `bootstrapper` — Entry point. Runs `controllers:start()` and services.
 
-**StarterPlayer/StarterPlayerScripts/client:** classes, controllers (`start()`), entities (client game object representations), services (`return 0`; no start()), utils, bootstrapper, ui/frames (UI modules), ui/helpers (UI interaction helpers), ui/hud (UI bootstrapper; `return 0`)
+**StarterPlayer/StarterPlayerScripts/client:**
+- `classes` — Classes/enums for specific objects. Client-side domain types.
+- `controllers` — Bootstrap lifecycle. `function controllerName:start()`.
+- `entities` — Client game object representations. Renderable entities (including players). Optimize for client-side rendering and server-client sync strategies.
+- `services` — Long-lived modules. `return 0`. No `start()`.
+- `utils` — Client-only helpers.
+- `bootstrapper` — Entry point.
+- `ui/frames` — Dedicated UI modules. Each ModuleScript handles one specific UI (e.g., `shop`, `shop_coin`, `shop_swords`). Code inside is fully dedicated to that UI.
+- `ui/helpers` — Quick reusable helpers for UI frames. Interaction logic shared across UI modules.
+- `ui/hud` — UI bootstrapper. `return 0`.
 
 ## Conventions
 - Controllers: bootstrap lifecycle (`function controllerName:start()`). Services: initialized once, `return 0`, no start().
