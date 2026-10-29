@@ -24,6 +24,34 @@ Do not stop until you have verified your own work. Re-read written code and vali
 - Works with function declarations: `const function addOne(x: number): number ... end`.
 - Multi-assignment: `const a, b = 1, 2`.
 
+### const function vs local function
+Default to `const function` for module-level functions. Function reference never changes, cannot reassign. Use `local function` only for forward declarations (mutual recursion) or conditional reassignment.
+
+```lua
+const function calculateDamage(base, mult)
+    return base * mult
+end
+
+const function onPlayerAdded(player)
+    player.CharacterAdded:Connect(onCharacterAdded)
+end
+```
+
+Forward declaration pattern:
+```lua
+local processNode
+const function traverseTree(node)
+    if node.children then
+        for _, child in node.children do
+            processNode(child)
+        end
+    end
+end
+processNode = traverseTree
+```
+
+Most functions never reassign. Most should be `const`.
+
 ## Style
 - Max performance + minimal size + readability. Modular, safe, no redundancy. Early return.
 - Reassess constantly: can it be reduced? Made more direct?
