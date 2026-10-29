@@ -16,6 +16,11 @@ Do not stop until you have verified your own work. Re-check module placement and
 - camelCase for local variables, member values, functions, params, table keys. PascalCase for types/classes and Roblox API references. LOUD_SNAKE_CASE for `const` bindings holding config or service references. Enum members exempt.
 - Services always `const`, never `local`. Module refs, configs, singletons: `const`. Mutable state, loop counters, accumulators: `local`.
 
+## Immutable
+- Never delete, edit, or rename bootstrapper scripts: `server/bootstrapper`, `client/bootstrapper`, `client/ui/hud`. These are entry points. Do not touch.
+- Never delete, rename, or restructure existing folders in the architecture. Folders are structural contracts. Add new modules inside existing folders, not new folders.
+- If a folder or bootstrapper exists, preserve it exactly. Only add or modify modules within allowed boundaries.
+
 ## Structure
 
 **Workspace:**
